@@ -24,7 +24,7 @@
       text-align: center;
       font-size: 10px;
     }
-
+    
     body {
       font-size: 2rem;
       display:flex;
@@ -54,19 +54,62 @@
       height: 100%;
       transform: translateY(-3px); /* account for the height of the clock hands */
     }
-
+    
     .hand {
       width:50%;
       height:6px;
       background:black;
       position: absolute;
       top:50%;
+      /* my */
+      transform-origin: 100%;
+      transform: rotate(90deg);    
+      transition: all 0.3s;  
+    }
+
+    .hour-hand {
+      width: 35%;
+      left: 15%;
+      background-color: red;
+    }
+    .min-hand {
+      background-color: white;
+    }
+    .second-hand {
     }
 
   </style>
-
+    
   <script>
+    const hourHand = document.querySelector('.hour-hand');
+    const minHand = document.querySelector('.min-hand');
+    const secHand = document.querySelector('.second-hand');
 
+    secHand.style.transition = 'none';
+    secHand.style.transition = null;
+
+    function setDate() {
+      const now = new Date();
+      const hours = now.getHours();
+      const hoursDegrees = hours / 12 * 360 + 90;
+      const mins = now.getMinutes();
+      const minsDegrees = mins / 60 * 360 + 90;
+      const seconds = now.getSeconds();
+      const secondsDegrees = seconds / 60 * 360 + 90;
+
+      if ( seconds === 0 ) { secHand.style.transition = 'none'; }
+      if ( seconds === 1 ) { secHand.style.transition = null; }
+      if ( mins === 0 )    { minHand.style.transition = 'none'; }
+      if ( mins === 1 )    { minHand.style.transition = null; }
+      if ( hours === 0 )   { hourHand.style.transition = 'none'; }
+      if ( hours === 1 )   { hourHand.style.transition = null; }
+
+      hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+      minHand.style.transform = `rotate(${minsDegrees}deg)`;
+      secHand.style.transform = `rotate(${secondsDegrees}deg)`;
+    }
+
+    setInterval(setDate, 1000);
 
   </script>
 </body>
