@@ -1,0 +1,14 @@
+=== 1
+define variables
+styling img with variables
+styling .hl coloê
+=== 2
+input name = css property name
+select all inputs
+listen each inputs for 'change' and 'mousemove', run foo
+foo
+  get suffix (px or nothing)
+  document.documentElement.style.setProperty(name, value)
+
+=== setProperty
+works only with .style
